@@ -14,7 +14,7 @@ all_would_eat_at([Person|Rest], Place) :-
 
 
 would_eat_at(Person, Place) :-
-  lunch_place(Place),
+  restaurant(Place),
   fits_vegetarian_preferences(Person, Place),
   fits_general_preferences(Person, Place).
 
