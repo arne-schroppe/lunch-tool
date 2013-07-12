@@ -3,9 +3,18 @@
 :- consult(lunch_places).
 
 
-have_lunch_at(People, Places) :-
-  findall(X, all_would_eat_at(People, X), Places).
+have_lunch_at(People, Places, LongLunchOk) :-
+  findall(X, place(X, People, LongLunchOk), Places).
 
+place(Place, People, LongLunchOk) :-
+    all_would_eat_at(People, Place),
+    ok_location(Place, LongLunchOk).
+
+ok_location(Place, LongLunchOk) :-
+    not(LongLunchOk),
+    not(far_away(Place)).
+ok_location(_Place, LongLunchOk) :-
+    LongLunchOk.
 
 all_would_eat_at([], _).
 all_would_eat_at([Person|Rest], Place) :-
