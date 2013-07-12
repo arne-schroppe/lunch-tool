@@ -12,7 +12,7 @@ place(Place, People, LongLunchOk) :-
 
 ok_location(Place, LongLunchOk) :-
     not(LongLunchOk),
-    not(far_away(Place)).
+    not(time_consuming(Place)).
 ok_location(_Place, LongLunchOk) :-
     LongLunchOk.
 
