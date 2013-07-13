@@ -8,12 +8,12 @@ have_lunch_at(People, Places, LongLunchOk) :-
 
 place(Place, People, LongLunchOk) :-
     all_would_eat_at(People, Place),
-    ok_location(Place, LongLunchOk).
+    location_ok(Place, LongLunchOk).
 
-ok_location(Place, LongLunchOk) :-
+location_ok(Place, LongLunchOk) :-
     not(LongLunchOk),
     not(time_consuming(Place)).
-ok_location(_Place, LongLunchOk) :-
+location_ok(_Place, LongLunchOk) :-
     LongLunchOk.
 
 all_would_eat_at([], _).
@@ -23,6 +23,7 @@ all_would_eat_at([Person|Rest], Place) :-
 
 
 would_eat_at(Person, Place) :-
+  person(Person),
   restaurant(Place),
   fits_vegetarian_preferences(Person, Place),
   fits_general_preferences(Person, Place).

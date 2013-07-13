@@ -21,7 +21,6 @@ restaurant(yumcha_heroes).
 
 bad_for_vegetarians(fleischerei).
 
-% TODO add time (i.e. restaurants where it takes more or less time)
 
 time_consuming(imbiss_204).
 time_consuming(yumcha_heroes).
