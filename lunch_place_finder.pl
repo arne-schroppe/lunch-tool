@@ -3,23 +3,28 @@
 :- consult(lunch_places).
 
 
-have_lunch_at(People, Places, LongLunchOk) :-
-  findall(X, place(X, People, LongLunchOk), Places).
+have_lunch_at(People, Places) :-
+  nonvar(People),
+  setof(Y, foreach(member(X, People), would_eat_at(X, Y)), Places),
+  !.
 
-place(Place, People, LongLunchOk) :-
-    all_would_eat_at(People, Place),
-    location_ok(Place, LongLunchOk).
+have_lunch_at(People, Places) :-
+  nonvar(Places),
+  setof(X, foreach(member(Y, Places), would_eat_at(X, Y)), People),
+  !.
+
+
+have_lunch_at(People, Places, LongLunchOk) :-
+  nonvar(People),
+  setof(Y, foreach(member(X, People), (would_eat_at(X, Y), location_ok(Y, LongLunchOk))), Places),
+  !.
+
 
 location_ok(Place, LongLunchOk) :-
     not(LongLunchOk),
     not(time_consuming(Place)).
 location_ok(_Place, LongLunchOk) :-
     LongLunchOk.
-
-all_would_eat_at([], _).
-all_would_eat_at([Person|Rest], Place) :-
-  would_eat_at(Person, Place),
-  all_would_eat_at(Rest, Place).
 
 
 would_eat_at(Person, Place) :-
