@@ -10,7 +10,7 @@ have_lunch_at(People, Places) :-
 
 have_lunch_at(People, Places) :-
   nonvar(Places),
-  setof(X, foreach(member(Y, Places), would_eat_at(X, Y)), People),
+  setof(X, foreach(member(Y, Places), (person(X), would_eat_at(X, Y))), People),
   !.
 
 
@@ -28,7 +28,6 @@ location_ok(_Place, LongLunchOk) :-
 
 
 would_eat_at(Person, Place) :-
-  person(Person),
   restaurant(Place),
   fits_vegetarian_preferences(Person, Place),
   fits_general_preferences(Person, Place).
