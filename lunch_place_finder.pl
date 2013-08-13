@@ -5,7 +5,7 @@
 
 have_lunch_at(People, Places) :-
   nonvar(People),
-  setof(Y, foreach(member(X, People), would_eat_at(X, Y)), Places),
+  setof(Y, foreach(member(X, People), (would_eat_at(X, Y), not(time_consuming(Y)))), Places),
   !.
 have_lunch_at(People, Places) :-
   nonvar(Places),
